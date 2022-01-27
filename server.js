@@ -19,8 +19,13 @@ const io = require("socket.io")(server, {
         origin: '*'
     }
 });
+io.configure(function() {
+    io.set("transports", ["xhr-polling"]);
+    io.set("polling duration", 10);
+});
 
 const { ExpressPeerServer } = require("peer");
+const { isObject } = require('util');
 const peerServer = ExpressPeerServer(server, {
     debug: true
 });
