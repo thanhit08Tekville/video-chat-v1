@@ -6,19 +6,20 @@ const server = http.createServer(app);
 const { v4: uuidv4 } = require("uuid");
 app.set("view engine", "ejs");
 const { Server } = require("socket.io");
-const io = new Server(server, {
-    allowEIO3: true,
-    cors: {
-        origin: '*'
-    }
-});
-
 // const io = require("socket.io")(server, {
 //     allowEIO3: true,
 //     cors: {
 //         origin: '*'
 //     }
 // });
+
+const io = require("socket.io")(server, {
+    allowEIO3: true,
+    cors: {
+        origin: '*'
+    }
+});
+
 const { ExpressPeerServer } = require("peer");
 const peerServer = ExpressPeerServer(server, {
     debug: true
