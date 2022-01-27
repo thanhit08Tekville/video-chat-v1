@@ -1,19 +1,18 @@
-const socket = io("/", { secure: true });
-// socket = io(':8080',{secure: true});
+const socket = io("/");
 const videoGrid = document.getElementById("video-grid");
 const myVideo = document.createElement("video");
 const showChat = document.querySelector("#showChat");
 const backBtn = document.querySelector(".header__back");
 myVideo.muted = true;
 
-backBtn.addEventListener("click", function() {
+backBtn.addEventListener("click", () => {
     document.querySelector(".main__left").style.display = "flex";
     document.querySelector(".main__left").style.flex = "1";
     document.querySelector(".main__right").style.display = "none";
     document.querySelector(".header__back").style.display = "none";
 });
 
-showChat.addEventListener("click", function() {
+showChat.addEventListener("click", () => {
     document.querySelector(".main__right").style.display = "flex";
     document.querySelector(".main__right").style.flex = "1";
     document.querySelector(".main__left").style.display = "none";
@@ -23,9 +22,9 @@ showChat.addEventListener("click", function() {
 const user = prompt("Enter your name");
 
 var peer = new Peer(undefined, {
+    path: "/peerjs",
     host: "/",
-    port: 443,
-    secure: true,
+    port: "443",
 });
 
 let myVideoStream;
@@ -75,7 +74,7 @@ let text = document.querySelector("#chat_message");
 let send = document.getElementById("send");
 let messages = document.querySelector(".messages");
 
-send.addEventListener("click", function(e) {
+send.addEventListener("click", (e) => {
     if (text.value.length !== 0) {
         socket.emit("message", text.value);
         text.value = "";
@@ -92,7 +91,7 @@ text.addEventListener("keydown", (e) => {
 const inviteButton = document.querySelector("#inviteButton");
 const muteButton = document.querySelector("#muteButton");
 const stopVideo = document.querySelector("#stopVideo");
-muteButton.addEventListener("click", function() {
+muteButton.addEventListener("click", () => {
     const enabled = myVideoStream.getAudioTracks()[0].enabled;
     if (enabled) {
         myVideoStream.getAudioTracks()[0].enabled = false;
@@ -107,7 +106,7 @@ muteButton.addEventListener("click", function() {
     }
 });
 
-stopVideo.addEventListener("click", function() {
+stopVideo.addEventListener("click", () => {
     const enabled = myVideoStream.getVideoTracks()[0].enabled;
     if (enabled) {
         myVideoStream.getVideoTracks()[0].enabled = false;
@@ -122,7 +121,7 @@ stopVideo.addEventListener("click", function() {
     }
 });
 
-inviteButton.addEventListener("click", function(e) {
+inviteButton.addEventListener("click", (e) => {
     prompt(
         "Copy this link and send it to people you want to meet with",
         window.location.href
