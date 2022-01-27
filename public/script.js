@@ -23,7 +23,7 @@ showChat.addEventListener("click", function() {
 const user = prompt("Enter your name");
 
 var peer = new Peer(undefined, {
-    host: "https://thanh-video-chat.herokuapp.com/",
+    host: "/",
     port: 443,
     secure: true,
 });
